@@ -5,9 +5,11 @@
     "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
     "bg-gradient-to-r from-green-300 via-blue-500 to-purple-600",
     "bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400",
-    "bg-gradient-to-r from-gray-700 via-gray-900 to-black",
+    "bg-gradient-to-r from-red-400 via-gray-300 to-blue-500",
     "bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100",
-    "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500"
+    "bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500",
+    "bg-gradient-to-r from-sky-400 via-rose-400 to-lime-400",
+    "bg-gradient-to-r from-green-300 to-purple-400"
   ]
 
   const tilts: { settings: UserFacingTiltSettings, description: string, code: string }[] = [
@@ -70,5 +72,10 @@
         <span class="h-min">{tiltObj.description}<br/><code>{tiltObj.code}</code></span>
       </div>
     {/each}
+    <div class="flex flex-row basis-[calc(50%_-_2rem)] items-center border border-gray-400 p-4 m-4">
+      <div use:tilt class="drop-shadow-lg m-5 ml-8 bg-sky-500 w-40 h-40 float-left"></div>
+      <span class="h-min">Listen to position<br/><code>use:tilt bind:tiltPosition={'{'}tiltPosition{'}'}</code></span>
+      <p></p>
+    </div>
   </div>
 </div>

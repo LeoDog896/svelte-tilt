@@ -1,5 +1,6 @@
 export interface TiltSettings {
   scale: number;
+	/** Max tilt rotation (in degrees) */
   max: number;
   reverse: boolean;
   strength: number;
@@ -18,22 +19,23 @@ export type UserFacingTiltSettings = Partial<TiltSettings>
 const defaultSettings: TiltSettings = { scale: 1, max: 15, reverse: false, strength: 1, transition: 300, xAxis: true, yAxis: true, recovery: true, perspective: "1000px" };
 
 export default function tilt(node: HTMLElement, settingsObj?: UserFacingTiltSettings) {	
-	const { width, height, left, top } = node.getBoundingClientRect();
 	let settings: TiltSettings = { ...defaultSettings, ...settingsObj };
 	
 	function onMouseMove(e: MouseEvent) {
-		const percX = (e.clientX - left) / width;
-		const percY = (e.clientY - top) / height;
+		const { width, height, left, top } = node.getBoundingClientRect();
+		const percentageX = Math.min(Math.max((e.clientX - left) / width, 0), 1);
+		const percentageY = Math.min(Math.max((e.clientY - top) / height,  0), 1);
 		
-		const { max, scale } = settings;
-		const twiceMax = max * 2;
-		const tiltX = defaultSettings.xAxis ? max - percY * twiceMax : 0;
-    const tiltY = defaultSettings.yAxis ? percX * twiceMax - max : 0;
+		const twiceMax = settings.max * 2;
+		const reverse = settings.reverse ? 1 : -1;
+
+		const tiltX = (settings.yAxis ? settings.max - (percentageY * twiceMax) : 0) * reverse * settings.strength;
+    const tiltY = (settings.xAxis ? (percentageX * twiceMax) - settings.max : 0) * reverse * settings.strength;
 		
-		node.style.transform = `perspective(${defaultSettings.perspective}) `+
-      `rotateX(${(settings.reverse ? 1 : -1) * tiltX * settings.strength}deg) ` +
-      `rotateY(${(settings.reverse ? 1 : -1) * tiltY * settings.strength}deg) ` +
-      `scale3d(${Array(3).fill(scale).join(', ')})`;
+		node.style.transform = `perspective(${settings.perspective}) `+
+      `rotateX(${tiltX}deg) ` +
+      `rotateY(${tiltY}deg) ` +
+      `scale3d(${Array(3).fill(settings.scale).join(', ')})`;
 	}
 	
 	let transitionId: NodeJS.Timeout;
@@ -46,7 +48,7 @@ export default function tilt(node: HTMLElement, settingsObj?: UserFacingTiltSett
 	function onMouseLeave() {
     if (!settings.recovery) return;
 		smoothTransition();
-		node.style.transform = `perspective(${1000}px) `+
+		node.style.transform = `perspective(${settings.perspective}) `+
       `rotateX(0deg) ` +
       `rotateY(0deg) ` +
       `scale3d(1, 1, 1)`;
