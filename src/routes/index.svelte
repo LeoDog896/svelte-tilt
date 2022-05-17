@@ -1,5 +1,5 @@
 <script lang="ts">
-  import tilt, { type UserFacingTiltSettings } from "$lib/tilt"
+  import tilt, { type UserFacingTiltSettings } from "$lib"
 
   const tilts: { settings: UserFacingTiltSettings, description: string, code: string, class: string }[] = [
     {
