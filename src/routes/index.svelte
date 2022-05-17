@@ -62,9 +62,9 @@
 </script>
 
 <div class="m-16">
-  <h1 class="text-6xl p-6 block bg-gradient-to-r from-blue-200 to-blue-300 w-min whitespace-nowrap" use:tilt>
+  <div class="text-6xl p-6 shadow-lg block bg-gradient-to-r from-blue-200 to-blue-300 w-min whitespace-nowrap" use:tilt>
     <span style="transform: translateZ(100px);" class="block">svelte-tilt</span>
-  </h1>
+  </div>
   <code>npm i -D svelte-tilt</code>
 
   <div class="flex flex-row flex-wrap w-full">
@@ -75,7 +75,7 @@
       </div>
     {/each}
     <div class="flex flex-row basis-[calc(50%_-_2rem)] items-center border border-gray-400 p-4 m-4">
-      <div use:tilt class="drop-shadow-lg m-5 ml-8 bg-sky-500 w-40 h-40 float-left flex justify-center items-center">
+      <div use:tilt class="shadow-lg m-5 ml-8 block bg-sky-500 w-40 h-40 flex justify-center items-center">
         <span class="text-white text-lg block" style="transform: translateZ(100px);">Float!</span>
       </div>
       <span class="h-min">Floaty Text<br/>
