@@ -79,6 +79,7 @@
         <span class="text-white text-lg block" style="transform: translateZ(100px);">Float!</span>
       </div>
       <span class="h-min">Floaty Text<br/>
+      <code><b>(parent)</b> display: block;</code><br/>
       <code><b>(child)</b> transform: translateZ(20px); display: block;</code></span>
     </div>
     <div class="flex flex-col flex-wrap basis-[calc(100%_-_2rem)] items-center border border-gray-400 p-4 m-4">
