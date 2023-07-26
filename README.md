@@ -6,7 +6,7 @@ Simple tilt library.
 
 ```html
 <script lang="ts">
-import tilt from 'svelte-tilt'
+    import tilt from 'svelte-tilt'
 </script>
 
 <div use:tilt class="w-40 h-40 bg-blue-300"> <!-- Using tailwind, but you can use any styling you want. -->
